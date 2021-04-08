@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
+}
+
+.gridContainer {
+	margin: 0;
+	height: 100vh;
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-template-rows: 60px repeat(2, 1fr);
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+}
+
+.ribbon,
+.courses,
+.catalog,
+.title,
+.courseField,
+.courseLabel {
+	outline: 1px solid black;
+	background: lightGray;
+	padding: 8px;
+}
+
+.courseLabel {
+	margin-bottom: 8px;
+	background: white;
+}
+
+.title {
+	background: rgb(191, 52, 54);
+	color: white;
+}
+
+.semesterContainer {
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.courseField {
+	flex-grow: 1;
+}
+
+.ribbon { grid-area: 1 / 1 / span 1 / span 6; }
+.courses { grid-area: 2 / 1 / span 2 / span 1; }
+/* getting selectors on the components is currently a little hacky */
+/* semester json id must match with these (or vice versa) */
+.sem-1 { grid-area: 2 / 2 / span 1 / span 1; }
+.sem-2 { grid-area: 3 / 2 / span 1 / span 1; }
+.sem-3 { grid-area: 2 / 3 / span 1 / span 1; }
+.sem-4 { grid-area: 3 / 3 / span 1 / span 1; }
+.sem-5 { grid-area: 2 / 4 / span 1 / span 1; }
+.sem-6 { grid-area: 3 / 4 / span 1 / span 1; }
+.sem-7 { grid-area: 2 / 5 / span 1 / span 1; }
+.sem-8 { grid-area: 3 / 5 / span 1 / span 1; }
+.catalog { grid-area: 2 / 6 / span 2 / span 1; }

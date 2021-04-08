@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+  <p>Welcome to the 4 year planner!:</p>
+  <br><br><br><br><br><br><br><br><br>
+  <p><a href="{% url 'logout' %}">Log Out</a></p>
+  <p><a href="{% url 'index' %}">4 year planner</a></p>
+  <p><a href="{% url 'password_reset' %}">Reset Password</a></p>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}
