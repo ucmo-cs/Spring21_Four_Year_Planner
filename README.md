@@ -1,6 +1,6 @@
 Run Django:
 
-python managepy runserver
+python manage.py runserver 3000
 
 
 Run React:
