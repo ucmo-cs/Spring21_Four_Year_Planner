@@ -12,11 +12,11 @@
 
 
   <br><br><br><br><br><br><br><br><br>
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
+  <p><a href="{% url 'logout' %}">Sign Out</a></p>
   <p><a href="{% url 'index' %}">4 year planner</a></p>  <!--new-->
   <p><a href="{% url 'password_reset' %}">Reset Password</a></p>
 {% else %}
   <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
+  <a href="{% url 'login' %}">Sign In</a>
 {% endif %}
 {% endblock %}
