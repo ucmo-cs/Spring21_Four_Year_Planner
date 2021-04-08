@@ -1,13 +1,57 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'login_mock.css' %}" rel="stylesheet"/>
   <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
 </head>
+
 <body>
-  <main>
-    {% block content %}
-    {% endblock %}
-  </main>
-</body>
+
+<header class="header">
+    <div class="container-fluid">
+        <div class="pull-left brand">
+            <a href="">
+                <img alt="wso2" class="logo" src="{% static 'images/ssologo.png' %}" title="wso2"/>
+            </a>
+        </div>
+    </div>
+</header>
+
+<div class="div">
+  <div class="title">
+        <p>UCM Single Sign-On</p>
+    </div>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+
+                <div class="form-links">
+                    <div class="links">
+                        <p>
+                            For assistance, contact the <a href="https://www.ucmo.edu/offices/office-of-technology/internal-resources/shared/technology-support-center/" target="_blank">Technology Support Center</a>
+                        </p>
+                        <p>
+                            <a href="https://www.ucmo.edu/offices/general-counsel/university-policy-library/policies/acceptable-use-policy/" target=_blank>Acceptable Use Policy</a>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <p>University of Central Missouri | © 2020 Inc. All Rights Reserved.</p>
+            </div>
+        </footer>
+
+    </body>
+
 </html>
