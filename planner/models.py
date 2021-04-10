@@ -32,5 +32,5 @@ class Prerequisite(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='+')
     prereq = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='+')
     def __str__(self):
-        return self.course.course_id, self.prereq
+        return self.course.course_id#, self.prereq
 
