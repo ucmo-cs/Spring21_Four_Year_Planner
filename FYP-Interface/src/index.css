@@ -19,7 +19,7 @@ body {
 }
 
 .ribbon,
-.courses,
+.availableCourses,
 .catalog,
 .title,
 .courseField,
@@ -39,7 +39,8 @@ body {
 	color: white;
 }
 
-.semesterContainer {
+.semester,
+.availableCourses {
 	padding: 0;
 	display: flex;
 	flex-direction: column;
@@ -48,10 +49,11 @@ body {
 
 .courseField {
 	flex-grow: 1;
+	overflow: scroll;
 }
 
 .ribbon { grid-area: 1 / 1 / span 1 / span 6; }
-.courses { grid-area: 2 / 1 / span 2 / span 1; }
+.availableCourses { grid-area: 2 / 1 / span 2 / span 1; }
 /* getting selectors on the components is currently a little hacky */
 /* semester json id must match with these (or vice versa) */
 .sem-1 { grid-area: 2 / 2 / span 1 / span 1; }
