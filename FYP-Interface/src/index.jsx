@@ -2,9 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import initialData from './initialData';
-import Column from './column';
+import Semester from './semester';
 import { DragDropContext } from 'react-beautiful-dnd';
-
 
 const generateState = () => {
 	const state = initialData;
@@ -48,7 +47,7 @@ class App extends React.Component {
 				<div className="ribbon">This is the ribbon</div>
 				<div className="courses">Course list here</div>
 				{Object.values(this.state.semesters).map((sem, index) => {
-					return <Column key={sem.id} sem={sem} courses={this.state.courses} />
+					return <Semester key={sem.id} sem={sem} courses={this.state.courses} />
 				})}
 				<div className="catalog">Major catalog here</div>
 			</div>
