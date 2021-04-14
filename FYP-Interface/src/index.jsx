@@ -6,48 +6,31 @@ import Semester from './semester';
 import AvailableCourses from './availableCourses';
 import { DragDropContext } from 'react-beautiful-dnd';
 
-const generateState = () => {
-	const state = initialData;
-	/* generate availableCourses here */
-	state.availableCourses = Object.keys(state.courses);
-
-	// Remove all planned courses from the available courses list
-	// Makes no sense to be able to add a course that you're already taking
-	// Maybe move this filter to the AvailableCourses render()?
-	for(const sem of Object.values(state.semesters)){
-		for(const courseId of sem.courseIds){
-			state.availableCourses = state.availableCourses.filter(e => e !== courseId);
-		}
-	}
-
-	return state;
-}
-
 class App extends React.Component {
-	state = generateState();
+	state = initialData;
 
 	onDragEnd = result => {
 		const { destination, source, draggableId } = result;
 
 		if(!destination) return;
 
-		const sourceSem = this.state.semesters[source.droppableId];
-		const destSem = this.state.semesters[destination.droppableId];
-		const newSourceCourseIds = Array.from(sourceSem.courseIds);
-
-		newSourceCourseIds.splice(source.index, 1);
-
-		// Allows for reording within the same column
-		const newDestCourseIds =
-			(destination.droppableId === source.droppableId) ?
-			newSourceCourseIds :
-			Array.from(destSem.courseIds);
-
-		newDestCourseIds.splice(destination.index, 0, draggableId);
+		console.log(destination)
 
 		const newState = Object.assign({}, this.state);
-		newState.semesters[sourceSem.id].courseIds = newSourceCourseIds;
-		newState.semesters[destSem.id].courseIds = newDestCourseIds;
+
+		if(source.droppableId !== "availableCourses") {
+			const sourceSem = this.state.semesters[source.droppableId];
+			const newSourceCourseIds = Array.from(sourceSem.courseIds);
+			newSourceCourseIds.splice(source.index, 1);
+			newState.semesters[sourceSem.id].courseIds = newSourceCourseIds;
+		}
+
+		if(destination.droppableId !== "availableCourses") {
+			const destSem = newState.semesters[destination.droppableId];
+			const newDestCourseIds = Array.from(destSem.courseIds);
+			newDestCourseIds.splice(destination.index, 0, draggableId);
+			newState.semesters[destSem.id].courseIds = newDestCourseIds;
+		}
 
 		this.setState(newState);
 	}
@@ -56,7 +39,7 @@ class App extends React.Component {
 		<DragDropContext onDragEnd={this.onDragEnd}>
 			<div className="gridContainer">
 				<div className="ribbon">This is the ribbon</div>
-				<AvailableCourses courseIds={this.state.availableCourses} courses={this.state.courses}/>
+				<AvailableCourses courseIds={generateAvailableCourses(this.state)} courses={this.state.courses}/>
 				{Object.values(this.state.semesters).map((sem, index) => {
 					return <Semester key={sem.id} sem={sem} courses={this.state.courses} />
 				})}
@@ -64,6 +47,21 @@ class App extends React.Component {
 			</div>
 		</DragDropContext>
 	)}
+}
+
+/* I'm not sure if this function is declared in the correct space
+*  It seems like I shouldn't need to pass through the state, but
+*  if declared inside the class, it's not getting hoisted properly
+*  to be used in render()
+*/
+const generateAvailableCourses = (state) => {
+	var availableCourses = Object.keys(state.courses);
+	for(const sem of Object.values(state.semesters)){
+		for(const courseId of sem.courseIds){
+			availableCourses = availableCourses.filter(e => e !== courseId);
+		}
+	}
+	return availableCourses;
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
