@@ -35,11 +35,21 @@ class App extends React.Component {
 		this.setState(newState);
 	}
 
+	generateAvailableCourses() {
+		var availableCourses = Object.keys(this.state.courses);
+		for(const sem of Object.values(this.state.semesters)){
+			for(const courseId of sem.courseIds){
+				availableCourses = availableCourses.filter(e => e !== courseId);
+			}
+		}
+		return availableCourses;
+	}
+
 	render() { return (
 		<DragDropContext onDragEnd={this.onDragEnd}>
 			<div className="gridContainer">
 				<div className="ribbon">This is the ribbon</div>
-				<AvailableCourses courseIds={generateAvailableCourses(this.state)} courses={this.state.courses}/>
+				<AvailableCourses courseIds={this.generateAvailableCourses()} courses={this.state.courses}/>
 				{Object.values(this.state.semesters).map((sem, index) => {
 					return <Semester key={sem.id} sem={sem} courses={this.state.courses} />
 				})}
@@ -47,21 +57,6 @@ class App extends React.Component {
 			</div>
 		</DragDropContext>
 	)}
-}
-
-/* I'm not sure if this function is declared in the correct space
-*  It seems like I shouldn't need to pass through the state, but
-*  if declared inside the class, it's not getting hoisted properly
-*  to be used in render()
-*/
-const generateAvailableCourses = (state) => {
-	var availableCourses = Object.keys(state.courses);
-	for(const sem of Object.values(state.semesters)){
-		for(const courseId of sem.courseIds){
-			availableCourses = availableCourses.filter(e => e !== courseId);
-		}
-	}
-	return availableCourses;
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
