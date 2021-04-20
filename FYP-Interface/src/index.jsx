@@ -5,6 +5,7 @@ import initialData from './initialData';
 import Semester from './semester';
 import AvailableCourses from './availableCourses';
 import { DragDropContext } from 'react-beautiful-dnd';
+import axios from 'axios';
 
 class App extends React.Component {
 	state = initialData;
@@ -13,8 +14,6 @@ class App extends React.Component {
 		const { destination, source, draggableId } = result;
 
 		if(!destination) return;
-
-		console.log(destination)
 
 		const newState = Object.assign({}, this.state);
 
@@ -37,6 +36,8 @@ class App extends React.Component {
 
 	generateAvailableCourses() {
 		var availableCourses = Object.keys(this.state.courses);
+		axios.get('/courses').then(ref => console.log(ref.data));
+		console.log(availableCourses);
 		for(const sem of Object.values(this.state.semesters)){
 			for(const courseId of sem.courseIds){
 				availableCourses = availableCourses.filter(e => e !== courseId);
