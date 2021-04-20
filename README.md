@@ -4,6 +4,9 @@ Updated the databases
 
 New picture on the log in screen taken by myself
 
+Pulled in files from the Axios-Implementation Branch
+
+
 Run Django:
 
 python manage.py runserver 3000
