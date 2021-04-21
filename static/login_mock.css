@@ -1,8 +1,8 @@
 /* Styles for all of body*/
 body {
     margin: 0px;
-    background: url(images/loginbg.jpg) no-repeat 50% 33%;
-    background-size: 1350px;
+    background: url(images/loginbg.jpg) no-repeat 70% -5%;
+    background-size: 1750px;
     font-family: 'Roboto Light', Arial, Helvetica, sans-serif;
     font-weight: 300;
     min-height: 100%;
