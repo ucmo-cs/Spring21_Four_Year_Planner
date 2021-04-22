@@ -19,7 +19,7 @@ const initialData = {
 		'CS32007': { id: 'CS32007', desc: 'Public Speaking' },
 		'CS32008': { id: 'CS32008', desc: 'Calculus I' },
 	},
-	availableCourses: ['CS3200', 'CS101', 'CS4900', 'CS1020', 'course-5', 'course-6', 'course-7', 'course-8', 'course-9', 'CS32000', 'CS32001', 'CS32002', 'CS32003', 'CS32004', 'CS32005', 'CS32006', 'CS32007', 'CS32008'],
+	availableCourses: [],
 	semesters: {
 		'sem-1': { id: 'sem-1', title: 'Fall 20',   courseIds: ['CS3200', 'CS101', 'CS4900']},
 		'sem-2': { id: 'sem-2', title: 'Spring 21', courseIds: []},
