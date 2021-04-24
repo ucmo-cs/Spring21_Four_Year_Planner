@@ -39,32 +39,30 @@ class App extends React.Component {
 		this.setState(newState);
 	}
 
+	searchCB = search => {
+		search = search.target.value.toLowerCase();
+		let courses = Object.values(this.state.courses).map(c => c.course_id);
+		courses = courses.filter(c => c.toLowerCase().includes(search))
+		console.log(courses)
+		this.setState({
+			availableCourses: courses
+		})
+	}
+
 	render() { return (
 		<DragDropContext onDragEnd={this.onDragEnd}>
 			<div className="gridContainer">
 				<div className="ribbon">
 					This is the ribbon
-					<button onClick={() => loadFromDb( ref => {
-						console.log(this.state.availableCourses)
-						this.setState({
-							availableCourses: ref.data.map(c => c.course_id)
-						})
-						console.log(this.state.availableCourses)
-					})}> Load </button>
 				</div>
-				<AvailableCourses state={this.state}/>
+				<AvailableCourses state={this.state} searchCB={this.searchCB}/>
 				{Object.values(this.state.semesters).map((sem, index) => {
-					return <Semester key={sem.id} sem={sem} courses={this.state.courses} />
+					return <Semester key={sem.id} sem={sem} courses={this.state.courses}/>
 				})}
 				<div className="catalog">Major catalog here</div>
 			</div>
 		</DragDropContext>
 	)}
-}
-
-const loadFromDb = (cb) => {
-	axios.get('/courses')
-		.then(cb)
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
