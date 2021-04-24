@@ -36,7 +36,7 @@ def prerequisites(request):
         prerequisite = Prerequisite.objects.all()
         serializer = PrerequisiteSerializer(prerequisite, many=True)
         return JsonResponse(serializer.data, safe=False)
-
+@csrf_exempt
 def saved_data(request):
     """
     List all saved data.
@@ -45,6 +45,21 @@ def saved_data(request):
         saveddata = Saved_Data.objects.all()
         serializer = SavedDataSerializer(saveddata, many=True)
         return JsonResponse(serializer.data, safe=False)
+
+
+@csrf_exempt
+def saved_data_put(request, cid):
+        """
+        Put a single saved data.
+        """
+        if request.method == 'PUT':
+            course = Saved_Data.objects.get(course_id=cid)
+            data = JSONParser().parse(request)
+            serializer = SavedDataSerializer(course, data=data)
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse(serializer.data)
+            return JsonResponse(serializer.errors, status=404)
 
 @csrf_exempt
 def semester_list(request):
