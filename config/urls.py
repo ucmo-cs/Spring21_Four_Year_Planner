@@ -32,9 +32,12 @@ urlpatterns = [
     # -Andrew
     path('semesters', views.semester_list),
 
+    # depeingind on type of request:
+    # if get
     # returns the saved data positions
+    # if put
+    # updates positions of course ids
     path('saved_data', views.saved_data),
-    path('saved_data/<slug:cid>', views.saved_data_put),
 
     # returns all course ids along with the semesters (ids) they are offered in
     path('offered_in', views.offered_in_list),

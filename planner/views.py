@@ -45,21 +45,16 @@ def saved_data(request):
         saveddata = Saved_Data.objects.all()
         serializer = SavedDataSerializer(saveddata, many=True)
         return JsonResponse(serializer.data, safe=False)
-
-
-@csrf_exempt
-def saved_data_put(request, cid):
-        """
-        Put a single saved data.
-        """
-        if request.method == 'PUT':
-            course = Saved_Data.objects.get(course_id=cid)
-            data = JSONParser().parse(request)
-            serializer = SavedDataSerializer(course, data=data)
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        for obj in data: #assuming you are posting a 'list' of objects
+            course = Saved_Data.objects.get(course_id=obj["course_id"])
+            serializer = SavedDataSerializer(course, data=obj)
             if serializer.is_valid():
                 serializer.save()
-                return JsonResponse(serializer.data)
-            return JsonResponse(serializer.errors, status=404)
+            else:
+                return JsonResponse(data, safe=False, status=404)
+        return JsonResponse(data, safe=False, status=200)
 
 @csrf_exempt
 def semester_list(request):
