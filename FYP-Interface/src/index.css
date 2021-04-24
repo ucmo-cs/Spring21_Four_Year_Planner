@@ -19,7 +19,6 @@ body {
 }
 
 .ribbon,
-.availableCourses,
 .catalog,
 .title,
 .courseField,
@@ -58,6 +57,14 @@ body {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+}
+
+.availableCourses input {
+	outline: 1px solid black;
+	border: none;
+  padding: 4px;
+  font-size: 14px;
+	/*-webkit-appearance: none;*/
 }
 
 .courseField {

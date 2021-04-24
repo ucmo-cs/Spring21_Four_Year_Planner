@@ -18,7 +18,7 @@ export default class AvailableCourses extends React.Component {
 			<div className="title">Available Courses</div>
 			<input
 				type="text"
-				placeholder="Course Search"
+				placeholder="Search…"
 				onChange={this.props.searchCB}
 			/>
 			<Droppable droppableId={'availableCourses'}>
