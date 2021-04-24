@@ -6,7 +6,7 @@ class CourseSerializer(serializers.ModelSerializer):
     # This serializes a list of Course objects, with all fields
     class Meta:
         model = Course
-        fields = ['id', 'course_id', 'description']
+        fields = ['course_id', 'description']
 
 
 class SemesterSerializer(serializers.ModelSerializer):
