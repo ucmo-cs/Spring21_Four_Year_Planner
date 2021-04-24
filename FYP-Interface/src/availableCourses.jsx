@@ -22,7 +22,7 @@ export default class AvailableCourses extends React.Component {
 					<div ref={provided.innerRef} {...provided.droppableProps} className="courseField">
 						{this.availableCourseIds().map((courseId, index) => {
 							const course = this.props.state.courses[courseId];
-							return <Course key={course.id} id={course.id} index={index} desc={course.desc} />
+							return <Course key={course.course_id} id={course.course_id} index={index} desc={course.description} />
 						})}
 						{provided.placeholder}
 					</div>

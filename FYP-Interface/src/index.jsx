@@ -13,10 +13,14 @@ class App extends React.Component {
 	constructor(props) {
 		super(props)
 		axios.get('/courses').then(ref => {
+			const allCourses = {};
+			for(const course of ref.data){
+				allCourses[course.course_id] = course
+			}
 			this.setState({
+				courses: allCourses,
 				availableCourses: ref.data.map(c => c.course_id)
 			})
-			console.log(this.state.availableCourses)
 		})
 	}
 
@@ -47,11 +51,6 @@ class App extends React.Component {
 						})
 						console.log(this.state.availableCourses)
 					})}> Load </button>
-					<button onClick={() =>
-						this.setState({
-							availableCourses: ['CS3200', 'CS101', 'CS4900', 'CS1020', 'course-5', 'course-6', 'course-7', 'course-8', 'course-9', 'CS32000', 'CS32001', 'CS32002', 'CS32003', 'CS32004', 'CS32005', 'CS32006', 'CS32007', 'CS32008']
-						}
-					)}> Revert </button>
 				</div>
 				<AvailableCourses state={this.state}/>
 				{Object.values(this.state.semesters).map((sem, index) => {
