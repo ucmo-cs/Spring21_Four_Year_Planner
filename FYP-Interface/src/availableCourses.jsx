@@ -16,7 +16,11 @@ export default class AvailableCourses extends React.Component {
 	render() { return (
 		<div className={'availableCourses'}>
 			<div className="title">Available Courses</div>
-			<input type="text" placeholder="Course Search"/>
+			<input
+				type="text"
+				placeholder="Course Search"
+				onChange={this.props.searchCB}
+			/>
 			<Droppable droppableId={'availableCourses'}>
 				{provided => (
 					<div ref={provided.innerRef} {...provided.droppableProps} className="courseField">
