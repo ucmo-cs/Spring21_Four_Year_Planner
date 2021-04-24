@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
+
 import './index.css';
+import logo from './UCM logo darkmode.png';
+import userIcon from './user.svg';
+
 import initialData from './initialData';
 import Semester from './semester';
 import AvailableCourses from './availableCourses';
 import { DragDropContext } from 'react-beautiful-dnd';
-import axios from 'axios';
 
 class App extends React.Component {
 	state = initialData;
@@ -53,7 +57,10 @@ class App extends React.Component {
 		<DragDropContext onDragEnd={this.onDragEnd}>
 			<div className="gridContainer">
 				<div className="ribbon">
-					This is the ribbon
+					<img src={logo} alt="UCM Logo" height='100%'/>
+					<div className="ribbonFiller"/>
+					<div style={{'padding': '8px'}}>John Doe</div>
+					<img src={userIcon} alt="User Icon" height='80%' style={{'WebkitFilter': 'invert(1)'}}/>
 				</div>
 				<AvailableCourses state={this.state} searchCB={this.searchCB}/>
 				{Object.values(this.state.semesters).map((sem, index) => {

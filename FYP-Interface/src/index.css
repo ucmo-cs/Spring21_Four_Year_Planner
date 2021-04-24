@@ -29,6 +29,19 @@ body {
 	padding: 8px;
 }
 
+.ribbon {
+	background: rgb(38, 38, 38);
+	color: white;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.ribbonFiller {
+	flex-grow: 1;
+}
+
 .courseLabel {
 	margin-bottom: 8px;
 	background: white;
@@ -50,6 +63,11 @@ body {
 .courseField {
 	flex-grow: 1;
 	overflow: scroll;
+}
+
+.catalog {
+	padding-top: 200px;
+	text-align: center;
 }
 
 .ribbon { grid-area: 1 / 1 / span 1 / span 6; }
