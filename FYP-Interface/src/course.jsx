@@ -3,20 +3,24 @@ import { Draggable } from 'react-beautiful-dnd';
 
 export default class Course extends React.Component {
 	render() {
+
 		let isInvalid = false;
 		// only run if state received (does not when in availableCourses)
 		if(this.props.state){
 			const prereqs = new Set(this.props.state.prerequisites[this.props.id]);
+
 			for(const sem of Object.values(this.props.state.semesters)){
-				for(const course of sem.courseIds){
-					prereqs.delete(course);
+				// only search prior semesters
+				if(sem.courseIds.includes(this.props.id)){
+					break;
 				}
+				sem.courseIds.forEach(c => prereqs.delete(c))
 			}
+
 			if(prereqs.size > 0){
 				isInvalid = true;
 			}
 		}
-
 
 		return (
 			<Draggable draggableId={this.props.id} index={this.props.index}>
@@ -25,14 +29,15 @@ export default class Course extends React.Component {
 						{...provided.draggableProps}
 						{...provided.dragHandleProps}
 						ref={provided.innerRef}
-						style={{
-							...provided.draggableProps.style,
-							background: isInvalid ? "yellow" : "white",
-							outline: "1px solid black",
-							marginBottom: "8px",
-						}}
+						className={"courseLabel " + (isInvalid ? "isInvalid" : "")}
 					>
-						<div style={{outline:"1px solid black", paddingLeft: "8px"}}>{this.props.id}</div>
+						<div style={{
+							outline:"1px solid black",
+							paddingLeft: "8px",
+							fontSize: ".75em"
+						}}>
+							{this.props.id}
+						</div>
 						<div style={{padding: "8px"}}>{this.props.desc}</div>
 					</div>
 				)}
