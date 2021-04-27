@@ -41,6 +41,10 @@ def saved_data(request):
     """
     List all saved data.
     """
+    if request.user.is_authenticated:
+        print(request.user.username)
+    else:
+        print("anonymous")
     if request.method == 'GET':
         saveddata = Saved_Data.objects.all()
         serializer = SavedDataSerializer(saveddata, many=True)
@@ -105,3 +109,18 @@ def prerequisite_list(request, cid):
         prereqs = Prerequisite.objects.filter(course__course_id=cid)
         serializer = PrerequisiteSerializer(prereqs, many=True)
         return JsonResponse(serializer.data, safe=False)
+
+# @csrf_exempt
+# def current_user(request):
+#     """
+#     Return current logged in user
+#     """
+#
+#     current_user = request.user
+#     print(current_user.username)
+#
+#     if request.method == 'GET':
+#         offered_ins = Offered_In.objects.all()
+#
+#         serializer = Offered_InSerializer(offered_ins, many=True)
+#         return JsonResponse()

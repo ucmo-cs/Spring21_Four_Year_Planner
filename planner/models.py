@@ -10,7 +10,7 @@ class Course(models.Model):
 class Saved_Data(models.Model):
     course_id = models.CharField(max_length=10)
     position = models.IntegerField()
-    username = models.CharField(max_length=50)
+    # username = models.CharField(max_length=50)
     def __str__(self):
         return self.course_id
     #label divs as '1, 2, 3, 4'... so 1 is a course saved in
@@ -34,4 +34,3 @@ class Prerequisite(models.Model):
     prereq = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='+')
     def __str__(self):
         return self.course.course_id#, self.prereq
-

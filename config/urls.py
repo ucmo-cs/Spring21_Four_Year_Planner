@@ -49,6 +49,4 @@ urlpatterns = [
     # returns all courses offered in a specific semester
     # ex: localhost:8000/courses/offered_in/Spring2021
     path('courses/offered_in/<slug:cid>', views.offered_in_course),
-
-
 ]

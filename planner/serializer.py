@@ -59,4 +59,10 @@ class PrerequisiteTitleSerializer(serializers.ModelSerializer):
 class SavedDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = Saved_Data
-        fields = ['course_id', 'position', 'username']
+        fields = ['course_id', 'position']
+
+# class UserSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = ['course_id', 'position', 'username']
+#
