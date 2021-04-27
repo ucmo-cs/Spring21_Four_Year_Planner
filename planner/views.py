@@ -114,17 +114,10 @@ def prerequisite_list(request, cid):
         serializer = PrerequisiteSerializer(prereqs, many=True)
         return JsonResponse(serializer.data, safe=False)
 
-# @csrf_exempt
-# def current_user(request):
-#     """
-#     Return current logged in user
-#     """
-#
-#     current_user = request.user
-#     print(current_user.username)
-#
-#     if request.method == 'GET':
-#         offered_ins = Offered_In.objects.all()
-#
-#         serializer = Offered_InSerializer(offered_ins, many=True)
-#         return JsonResponse()
+@csrf_exempt
+def current_user(request):
+    """
+    Return current logged in user
+    """
+    if request.method == 'GET':
+            return JsonResponse(request.user.username, safe=False)
