@@ -41,28 +41,20 @@ def saved_data(request):
     """
     List all saved data.
     """
-    if request.user.is_authenticated:
-        print(request.user.username)
-    else:
-        print("anonymous")
     if request.method == 'GET':
         saveddata = Saved_Data.objects.all()
         serializer = SavedDataSerializer(saveddata, many=True)
         return JsonResponse(serializer.data, safe=False)
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        print("put")
-        # if request.user.is_authenticated:
-        x = request.user.username
-        print("x")
-        for obj in data:  # assuming you are posting a 'list' of objects
+        name = request.user.username
+        for obj in data:
             ucourse = Saved_Data.objects.get(course_id=obj["course_id"])
-            userializer = SavedDataSerializerU(ucourse, x)
-            if userializer.is_valid():
-                print("valid")
-                userializer.save()
+            unameSerializer = SavedDataSerializerUsername(ucourse, name)
+            if unameSerializer.is_valid():
+                unameSerializer.save()
             else:
-                print("invalid")
+                print("invalid") # remember postman does not send user information
         for obj in data: #assuming you are posting a 'list' of objects
             course = Saved_Data.objects.get(course_id=obj["course_id"])
             serializer = SavedDataSerializer(course, data=obj)

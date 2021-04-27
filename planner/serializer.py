@@ -61,7 +61,7 @@ class SavedDataSerializer(serializers.ModelSerializer):
         model = Saved_Data
         fields = ['course_id', 'position']
 
-class SavedDataSerializerU(serializers.ModelSerializer):
+class SavedDataSerializerUsername(serializers.ModelSerializer):
     class Meta:
         model = Saved_Data
         fields = ['user']
