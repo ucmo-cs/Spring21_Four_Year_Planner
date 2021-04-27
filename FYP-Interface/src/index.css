@@ -77,6 +77,10 @@ body {
 	text-align: center;
 }
 
+.isInvalid {
+	background: yellow;
+}
+
 .ribbon { grid-area: 1 / 1 / span 1 / span 6; }
 .availableCourses { grid-area: 2 / 1 / span 2 / span 1; }
 /* getting selectors on the components is currently a little hacky */

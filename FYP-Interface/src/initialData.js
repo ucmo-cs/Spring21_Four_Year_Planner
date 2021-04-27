@@ -11,6 +11,7 @@ const initialData = {
 		'sem-7': { id: 'sem-7', title: 'Fall 23',   courseIds: []},
 		'sem-8': { id: 'sem-8', title: 'Spring 24', courseIds: []},
 	},
+	prerequisites: {},
 };
 
 export default initialData;

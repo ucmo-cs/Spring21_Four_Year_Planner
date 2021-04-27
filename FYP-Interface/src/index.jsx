@@ -15,7 +15,10 @@ class App extends React.Component {
 	state = initialData;
 
 	constructor(props) {
-		super(props)
+		super(props);
+
+		// TODO: combine these GETs
+
 		axios.get('/courses').then(ref => {
 			const allCourses = {};
 			for(const course of ref.data){
@@ -26,6 +29,19 @@ class App extends React.Component {
 				availableCourses: ref.data.map(c => c.course_id)
 			})
 		})
+
+		axios.get('/all_prerequisites').then(ref => {
+			const prereqs = {};
+			for(const course of ref.data){
+				if(!prereqs[course.course]){
+					prereqs[course.course] = [];
+				}
+				prereqs[course.course].push(course.prereq);
+			}
+			this.setState({
+				prerequisites: prereqs
+			})
+		});
 	}
 
 	onDragEnd = result => {
@@ -47,7 +63,6 @@ class App extends React.Component {
 		search = search.target.value.toLowerCase();
 		let courses = Object.values(this.state.courses).map(c => c.course_id);
 		courses = courses.filter(c => c.toLowerCase().includes(search))
-		console.log(courses)
 		this.setState({
 			availableCourses: courses
 		})
@@ -64,7 +79,12 @@ class App extends React.Component {
 				</div>
 				<AvailableCourses state={this.state} searchCB={this.searchCB}/>
 				{Object.values(this.state.semesters).map((sem, index) => {
-					return <Semester key={sem.id} sem={sem} courses={this.state.courses}/>
+					return <Semester
+						key={sem.id}
+						sem={sem}
+						courses={this.state.courses}
+						state={this.state}
+					/>
 				})}
 				<div className="catalog">Major catalog here</div>
 			</div>
