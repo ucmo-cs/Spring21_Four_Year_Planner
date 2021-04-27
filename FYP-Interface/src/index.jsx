@@ -8,6 +8,7 @@ import userIcon from './user.svg';
 
 import initialData from './initialData';
 import Semester from './semester';
+import MajorCatalog from './majorCatalog'
 import AvailableCourses from './availableCourses';
 import { DragDropContext } from 'react-beautiful-dnd';
 
@@ -89,7 +90,7 @@ class App extends React.Component {
 						state={this.state}
 					/>
 				})}
-				<div className="catalog">Major catalog here</div>
+				<MajorCatalog catalog={this.state.majorCatalog}/>
 			</div>
 		</DragDropContext>
 	)}
