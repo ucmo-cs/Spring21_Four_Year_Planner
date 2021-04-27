@@ -10,6 +10,7 @@ class Course(models.Model):
 class Saved_Data(models.Model):
     course_id = models.CharField(max_length=10)
     position = models.IntegerField()
+    username = models.CharField(max_length=50)
     def __str__(self):
         return self.course_id
     #label divs as '1, 2, 3, 4'... so 1 is a course saved in
