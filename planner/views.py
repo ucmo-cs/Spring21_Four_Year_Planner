@@ -51,6 +51,18 @@ def saved_data(request):
         return JsonResponse(serializer.data, safe=False)
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
+        print("put")
+        # if request.user.is_authenticated:
+        x = request.user.username
+        print("x")
+        for obj in data:  # assuming you are posting a 'list' of objects
+            ucourse = Saved_Data.objects.get(course_id=obj["course_id"])
+            userializer = SavedDataSerializerU(ucourse, x)
+            if userializer.is_valid():
+                print("valid")
+                userializer.save()
+            else:
+                print("invalid")
         for obj in data: #assuming you are posting a 'list' of objects
             course = Saved_Data.objects.get(course_id=obj["course_id"])
             serializer = SavedDataSerializer(course, data=obj)
