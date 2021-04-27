@@ -17,6 +17,7 @@ export default class Course extends React.Component {
 			}
 		}
 
+
 		return (
 			<Draggable draggableId={this.props.id} index={this.props.index}>
 				{provided => (
@@ -24,9 +25,15 @@ export default class Course extends React.Component {
 						{...provided.draggableProps}
 						{...provided.dragHandleProps}
 						ref={provided.innerRef}
-						className={"courseLabel" + (isInvalid ? " isInvalid" : "")}
+						style={{
+							...provided.draggableProps.style,
+							background: isInvalid ? "yellow" : "white",
+							outline: "1px solid black",
+							marginBottom: "8px",
+						}}
 					>
-						<div>{this.props.desc}</div>
+						<div style={{outline:"1px solid black", paddingLeft: "8px"}}>{this.props.id}</div>
+						<div style={{padding: "8px"}}>{this.props.desc}</div>
 					</div>
 				)}
 			</Draggable>

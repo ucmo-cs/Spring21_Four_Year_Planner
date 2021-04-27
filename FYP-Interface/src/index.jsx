@@ -61,10 +61,13 @@ class App extends React.Component {
 
 	searchCB = search => {
 		search = search.target.value.toLowerCase();
-		let courses = Object.values(this.state.courses).map(c => c.course_id);
-		courses = courses.filter(c => c.toLowerCase().includes(search))
+		let courses = Object.values(this.state.courses)
+			.filter(c =>
+				c.course_id.toLowerCase().includes(search) ||
+				c.description.toLowerCase().includes(search)
+			)
 		this.setState({
-			availableCourses: courses
+			availableCourses: courses.map(c => c.course_id)
 		})
 	}
 

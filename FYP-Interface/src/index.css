@@ -21,8 +21,7 @@ body {
 .ribbon,
 .catalog,
 .title,
-.courseField,
-.courseLabel {
+.courseField {
 	outline: 1px solid black;
 	background: lightGray;
 	padding: 8px;
@@ -39,11 +38,6 @@ body {
 
 .ribbonFiller {
 	flex-grow: 1;
-}
-
-.courseLabel {
-	margin-bottom: 8px;
-	background: white;
 }
 
 .title {
