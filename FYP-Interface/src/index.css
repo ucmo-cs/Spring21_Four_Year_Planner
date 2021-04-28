@@ -20,7 +20,6 @@ body {
 }
 
 .ribbon,
-.catalog,
 .title,
 .courseField {
 	outline: 1px solid black;
@@ -39,6 +38,18 @@ body {
 
 .ribbonFiller {
 	flex-grow: 1;
+}
+
+
+.catalog {
+	outline: 1px solid black;
+	background: lightGray;
+}
+
+.catalogSection {
+	background: white;
+	outline: 1px solid black;
+	margin-bottom: 4px;
 }
 
 .title {
