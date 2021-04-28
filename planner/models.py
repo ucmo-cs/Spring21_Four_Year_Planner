@@ -35,3 +35,8 @@ class Prerequisite(models.Model):
     prereq = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='+')
     def __str__(self):
         return self.course.course_id#, self.prereq
+
+class CurrentUser(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, default=True, primary_key=True)
+    def __str__(self):
+        return self.user

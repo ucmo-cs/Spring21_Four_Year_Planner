@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import *
+from django.contrib.auth.models import User
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -72,3 +73,12 @@ class SavedDataSerializerUsername(serializers.ModelSerializer):
         model = Saved_Data
         fields = ['user']
 
+
+class CurrentUserSerializer(serializers.ModelSerializer):
+    def getUsername(self, obj):
+        return obj.user.username
+    username = serializers.SerializerMethodField("getUsername")
+
+    class Meta:
+        model = CurrentUser
+        fields = ['username']

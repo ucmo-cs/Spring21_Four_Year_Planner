@@ -39,12 +39,35 @@ urlpatterns = [
     # updates positions of course ids
     path('saved_data', views.saved_data),
 
+
     # returns all course ids along with the semesters (ids) they are offered in
     path('offered_in', views.offered_in_list),
 
     # returns all prerequisites for a specific course
     # ex: localhost:8000/courses/prerequisites/CS1000
     path('courses/prerequisites/<slug:cid>', views.prerequisite_list),
+
+    # search course ids and descriptions
+    # matching the passed string
+    # can match either the id or description
+    # ex: http://localhost:8000/coursesearchOR/cs
+    path('coursesearchOR/<slug:cid>', views.coursesearchOR),
+
+    # search course ids and descriptions
+    # matching the passed string
+    # must match both id and description
+    # ex: http://localhost:8000/coursesearchAND/cs
+    path('coursesearchAND/<slug:cid>', views.coursesearchAND),
+
+    # search course ids
+    # matching the passed string
+    # ex: http://localhost:8000/coursesearchID/cs
+    path('coursesearchID/<slug:cid>', views.coursesearchID),
+
+    # search course descirptions
+    # matching the passed string
+    # ex: http://localhost:8000/coursesearchDESC/cs
+    path('coursesearchDESC/<slug:cid>', views.coursesearchDESC),
 
     # returns all courses offered in a specific semester
     # ex: localhost:8000/courses/offered_in/Spring2021

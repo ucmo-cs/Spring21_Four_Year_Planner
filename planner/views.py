@@ -1,16 +1,11 @@
-from django.shortcuts import render
+from django.db.models import Q
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
-from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
-from planner.models import Course, Semester, Offered_In, Prerequisite
 from planner.serializer import *
-
-
-# from django.db import models
 
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm
@@ -36,6 +31,35 @@ def prerequisites(request):
         prerequisite = Prerequisite.objects.all()
         serializer = PrerequisiteSerializer(prerequisite, many=True)
         return JsonResponse(serializer.data, safe=False)
+
+@csrf_exempt
+def coursesearchOR(request, cid):
+    if request.method == 'GET':
+        courses = Course.objects.filter(Q(course_id__contains=cid) | Q(description__contains=cid))
+        serializer = CourseSerializer(courses, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+@csrf_exempt
+def coursesearchAND(request, cid):
+    if request.method == 'GET':
+        courses = Course.objects.filter(Q(course_id__contains=cid) & Q(description__contains=cid))
+        serializer = CourseSerializer(courses, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+@csrf_exempt
+def coursesearchID(request, cid):
+    if request.method == 'GET':
+        courses = Course.objects.filter(course_id__contains=cid)
+        serializer = CourseSerializer(courses, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+@csrf_exempt
+def coursesearchDESC(request, cid):
+    if request.method == 'GET':
+        courses = Course.objects.filter(description__contains=cid)
+        serializer = CourseSerializer(courses, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
 @csrf_exempt
 def saved_data(request):
     """
@@ -120,4 +144,7 @@ def current_user(request):
     Return current logged in user
     """
     if request.method == 'GET':
-            return JsonResponse(request.user.username, safe=False)
+        print(request.user.username)
+        x = str(request.user.username)
+        return JsonResponse("x", safe=False)
+        return JsonResponse(request.user.username, safe=False)
