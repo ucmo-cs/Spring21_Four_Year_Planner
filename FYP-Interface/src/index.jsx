@@ -8,6 +8,7 @@ import userIcon from './user.svg';
 
 import initialData from './initialData';
 import Semester from './semester';
+import MajorCatalog from './majorCatalog'
 import AvailableCourses from './availableCourses';
 import { DragDropContext } from 'react-beautiful-dnd';
 
@@ -15,7 +16,10 @@ class App extends React.Component {
 	state = initialData;
 
 	constructor(props) {
-		super(props)
+		super(props);
+
+		// TODO: combine these GETs
+
 		axios.get('/courses').then(ref => {
 			const allCourses = {};
 			for(const course of ref.data){
@@ -26,6 +30,19 @@ class App extends React.Component {
 				availableCourses: ref.data.map(c => c.course_id)
 			})
 		})
+
+		axios.get('/all_prerequisites').then(ref => {
+			const prereqs = {};
+			for(const course of ref.data){
+				if(!prereqs[course.course]){
+					prereqs[course.course] = [];
+				}
+				prereqs[course.course].push(course.prereq);
+			}
+			this.setState({
+				prerequisites: prereqs
+			})
+		});
 	}
 
 	onDragEnd = result => {
@@ -45,12 +62,20 @@ class App extends React.Component {
 
 	searchCB = search => {
 		search = search.target.value.toLowerCase();
-		let courses = Object.values(this.state.courses).map(c => c.course_id);
-		courses = courses.filter(c => c.toLowerCase().includes(search))
-		console.log(courses)
+		let courses = Object.values(this.state.courses)
+			.filter(c =>
+				c.course_id.toLowerCase().includes(search) ||
+				c.description.toLowerCase().includes(search)
+			)
 		this.setState({
-			availableCourses: courses
+			availableCourses: courses.map(c => c.course_id)
 		})
+	}
+
+	enrolledCourses() {
+		let enrolledCourses = new Set();
+		Object.values(this.state.semesters).forEach(sem => sem.courseIds.forEach(c => enrolledCourses.add(c)))
+		return enrolledCourses;
 	}
 
 	render() { return (
@@ -64,9 +89,14 @@ class App extends React.Component {
 				</div>
 				<AvailableCourses state={this.state} searchCB={this.searchCB}/>
 				{Object.values(this.state.semesters).map((sem, index) => {
-					return <Semester key={sem.id} sem={sem} courses={this.state.courses}/>
+					return <Semester
+						key={sem.id}
+						sem={sem}
+						courses={this.state.courses}
+						state={this.state}
+					/>
 				})}
-				<div className="catalog">Major catalog here</div>
+				<MajorCatalog catalog={this.state.majorCatalog} enrolledCourses={this.enrolledCourses()}/>
 			</div>
 		</DragDropContext>
 	)}

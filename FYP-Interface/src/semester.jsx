@@ -11,7 +11,13 @@ export default class Semester extends React.Component {
 					<div ref={provided.innerRef} {...provided.droppableProps} className="courseField">
 						{this.props.sem.courseIds.map((courseId, index) => {
 							const course = this.props.courses[courseId];
-							return <Course key={course.course_id} id={course.course_id} index={index} desc={course.description} />
+							return <Course
+								key={course.course_id}
+								id={course.course_id}
+								index={index}
+								desc={course.description}
+								state={this.props.state}
+							/>
 						})}
 						{provided.placeholder}
 					</div>
