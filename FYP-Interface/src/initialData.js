@@ -58,6 +58,7 @@ const initialData = {
 			},
 		]
 	},
+	ButtonPopup: false,
 };
 
 export default initialData;

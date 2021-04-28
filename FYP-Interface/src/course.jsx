@@ -34,9 +34,12 @@ export default class Course extends React.Component {
 						<div style={{
 							outline:"1px solid black",
 							paddingLeft: "8px",
-							fontSize: ".75em"
+							//fontSize: ".75em"
+  						textAlign: "justify",
+  						textJustify: "inter-word",
 						}}>
 							{this.props.id}
+							<button>hi</button>
 						</div>
 						<div style={{padding: "8px"}}>{this.props.desc}</div>
 					</div>

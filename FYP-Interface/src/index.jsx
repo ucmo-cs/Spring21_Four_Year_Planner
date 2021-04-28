@@ -10,6 +10,7 @@ import initialData from './initialData';
 import Semester from './semester';
 import MajorCatalog from './majorCatalog'
 import AvailableCourses from './availableCourses';
+import Popup from './Popup';
 import { DragDropContext } from 'react-beautiful-dnd';
 
 class App extends React.Component {
@@ -72,6 +73,13 @@ class App extends React.Component {
 		})
 	}
 
+	onClickCB(){
+		this.setState({
+			ButtonPopup : this.state.ButtonPopup ? false : true
+		});
+		console.log("toggle!")
+	}
+
 	enrolledCourses() {
 		let enrolledCourses = new Set();
 		Object.values(this.state.semesters).forEach(sem => sem.courseIds.forEach(c => enrolledCourses.add(c)))
@@ -80,9 +88,18 @@ class App extends React.Component {
 
 	render() { return (
 		<DragDropContext onDragEnd={this.onDragEnd}>
+			<Popup trigger={this.state.ButtonPopup} msg={this.state.popupMessage} onClickCB={() => this.onClickCB()}>
+				<h3>hello I'm a popup!</h3>
+			</Popup>
 			<div className="gridContainer">
 				<div className="ribbon">
 					<img src={logo} alt="UCM Logo" height='100%'/>
+					<button onClick={() => {
+						this.onClickCB()
+						this.setState({
+							popupMessage: "msg one"
+						})
+					}}>hi</button>
 					<div className="ribbonFiller"/>
 					<div style={{'padding': '8px'}}>John Doe</div>
 					<img src={userIcon} alt="User Icon" height='80%' style={{'WebkitFilter': 'invert(1)'}}/>
