@@ -6,7 +6,8 @@ export default class MajorCatalog extends React.Component {
 		const childrenSections = section.sections?.map(s => this.expandSection(s, depth+1));
 		let isSatisfied = true;
 		childrenSections?.forEach(c => isSatisfied = isSatisfied && c.isSatisfied)
-		// TODO: check validCourses against enrolled courses
+
+		// TODO: more detailed validation. MinHours of high order sections are currently ignored
 		let enrolledHours = 0;
 		section.validCourses?.forEach(set => {
 			for(const course of set){
