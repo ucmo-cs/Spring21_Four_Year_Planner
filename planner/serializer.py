@@ -57,11 +57,18 @@ class PrerequisiteTitleSerializer(serializers.ModelSerializer):
         fields = ['course']
 
 class SavedDataSerializer(serializers.ModelSerializer):
+
+    def getUsername(self, obj):
+        return obj.user.username
+    username = serializers.SerializerMethodField("getUsername")
+
+
     class Meta:
         model = Saved_Data
-        fields = ['course_id', 'position', 'user']
+        fields = ['course_id', 'position', 'username']
 
 class SavedDataSerializerUsername(serializers.ModelSerializer):
     class Meta:
         model = Saved_Data
         fields = ['user']
+
