@@ -7,12 +7,22 @@ export default class MajorCatalog extends React.Component {
 		let isSatisfied = true;
 		childrenSections?.forEach(c => isSatisfied = isSatisfied && c.isSatisfied)
 		// TODO: check validCourses against enrolled courses
+		let enrolledHours = 0;
+		section.validCourses?.forEach(set => {
+			for(const course of set){
+				if(this.props.enrolledCourses.has(course)){
+					enrolledHours += 3;
+					break;
+				}
+			}
+		});
+		if(enrolledHours < section.minHours) isSatisfied = false;
 
 		return ({
 			isSatisfied: isSatisfied,
 			display: [
 				<div
-					className="catalogSection"
+					className={"catalogSection" + (isSatisfied ? "" : " isInvalid")}
 					key={section.title}
 					style={{marginLeft: depth*16, paddingLeft: 8}}
 				>

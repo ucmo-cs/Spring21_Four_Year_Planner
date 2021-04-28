@@ -17,7 +17,7 @@ const initialData = {
 		sections: [
 			{
 				title: "Core classes",
-				minHours: 42,
+				minHours: 6,//42,
 				validCourses: [
 					["CS1000"],
 					["CS1100"],

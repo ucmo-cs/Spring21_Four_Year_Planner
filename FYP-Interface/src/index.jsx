@@ -72,6 +72,12 @@ class App extends React.Component {
 		})
 	}
 
+	enrolledCourses() {
+		let enrolledCourses = new Set();
+		Object.values(this.state.semesters).forEach(sem => sem.courseIds.forEach(c => enrolledCourses.add(c)))
+		return enrolledCourses;
+	}
+
 	render() { return (
 		<DragDropContext onDragEnd={this.onDragEnd}>
 			<div className="gridContainer">
@@ -90,7 +96,7 @@ class App extends React.Component {
 						state={this.state}
 					/>
 				})}
-				<MajorCatalog catalog={this.state.majorCatalog}/>
+				<MajorCatalog catalog={this.state.majorCatalog} enrolledCourses={this.enrolledCourses()}/>
 			</div>
 		</DragDropContext>
 	)}
