@@ -2,7 +2,7 @@ from django.db.models import Q
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
-from django.http import JsonResponse
+from django.http import  HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
 from planner.serializer import *
@@ -143,8 +143,15 @@ def current_user(request):
     """
     Return current logged in user
     """
+    # if request.method == 'GET':
+    #     print(request.user.username)
+    #     x = str(request.user.username)
+    #     # return JsonResponse("x", safe=False)
+    #     return JsonResponse(request.user.username, safe=False)
+
+    """
+    Return current logged in user
+    """
+    currentUser = request.user.username
     if request.method == 'GET':
-        print(request.user.username)
-        x = str(request.user.username)
-        return JsonResponse("x", safe=False)
-        return JsonResponse(request.user.username, safe=False)
+        return JsonResponse(currentUser, safe=False)
