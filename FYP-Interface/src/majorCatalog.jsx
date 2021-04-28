@@ -4,15 +4,12 @@ export default class MajorCatalog extends React.Component {
 	expandSection(section, depth=0){
 
 		const childrenSections = section.sections?.map(s => this.expandSection(s, depth+1));
-		let areChildrenSatisfied = true;
-		if(childrenSections){
-			for(const child of childrenSections) areChildrenSatisfied = areChildrenSatisfied && child.isSatisfied;
-		} else {
-			// TODO: check validCourses against enrolled courses
-		}
+		let isSatisfied = true;
+		childrenSections?.forEach(c => isSatisfied = isSatisfied && c.isSatisfied)
+		// TODO: check validCourses against enrolled courses
 
 		return ({
-			isSatisfied: true,
+			isSatisfied: isSatisfied,
 			display: [
 				<div
 					className="catalogSection"
