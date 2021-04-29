@@ -1,7 +1,10 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 
-export default class Course extends React.Component {
+export default class Course extends React.PureComponent {
+
+	static popupCB;
+
 	render() {
 
 		let isInvalid = false;
@@ -34,9 +37,14 @@ export default class Course extends React.Component {
 						<div style={{
 							outline:"1px solid black",
 							paddingLeft: "8px",
-							fontSize: ".75em"
+							//fontSize: ".75em"
+							display: "flex",
+							justifyContent: "space-between",
 						}}>
 							{this.props.id}
+							<button onClick={() => {
+								Course.popupCB(this.props.desc)
+							}}>[ i ]</button>
 						</div>
 						<div style={{padding: "8px"}}>{this.props.desc}</div>
 					</div>
