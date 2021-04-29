@@ -10,6 +10,7 @@ import initialData from './initialData';
 import Semester from './semester';
 import MajorCatalog from './majorCatalog'
 import AvailableCourses from './availableCourses';
+import Course from './course';
 import Popup from './Popup';
 import { DragDropContext } from 'react-beautiful-dnd';
 
@@ -44,6 +45,10 @@ class App extends React.Component {
 				prerequisites: prereqs
 			})
 		});
+
+		// This avoids having to pass the popupCB through the availableCourses and Semester classes
+		// Could be better done as a subscription system, but this is fine for small-scale
+		Course.popupCB = this.popupCB.bind(this)
 	}
 
 	onDragEnd = result => {
@@ -73,33 +78,27 @@ class App extends React.Component {
 		})
 	}
 
-	onClickCB(){
-		this.setState({
-			ButtonPopup : this.state.ButtonPopup ? false : true
-		});
-		console.log("toggle!")
+	popupCB(msg){
+		this.setState( prevState => { return {
+			popupMessage: msg,
+			isPopupActive : !prevState.isPopupActive
+		}});
 	}
 
 	enrolledCourses() {
 		let enrolledCourses = new Set();
+		// Scan over all semesters and collect the enrolled classes
 		Object.values(this.state.semesters).forEach(sem => sem.courseIds.forEach(c => enrolledCourses.add(c)))
 		return enrolledCourses;
 	}
 
 	render() { return (
 		<DragDropContext onDragEnd={this.onDragEnd}>
-			<Popup trigger={this.state.ButtonPopup} msg={this.state.popupMessage} onClickCB={() => this.onClickCB()}>
-				<h3>hello I'm a popup!</h3>
-			</Popup>
+			<Popup active={this.state.isPopupActive} msg={this.state.popupMessage} onClickCB={() => this.popupCB()}/>
 			<div className="gridContainer">
 				<div className="ribbon">
 					<img src={logo} alt="UCM Logo" height='100%'/>
-					<button onClick={() => {
-						this.onClickCB()
-						this.setState({
-							popupMessage: "msg one"
-						})
-					}}>hi</button>
+					<button onClick={() => this.popupCB("Hello there")}>hi</button>
 					<div className="ribbonFiller"/>
 					<div style={{'padding': '8px'}}>John Doe</div>
 					<img src={userIcon} alt="User Icon" height='80%' style={{'WebkitFilter': 'invert(1)'}}/>
