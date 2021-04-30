@@ -8,10 +8,24 @@ class Course(models.Model):
     def __str__(self):
         return self.course_id
 
+# class Saved_Data(models.Model):
+#     course_id = models.CharField(max_length=10)
+#     position = models.IntegerField()
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, default=True, primary_key=True)
+#     def __str__(self):
+#         return self.course_id
+
+
+
+
 class Saved_Data(models.Model):
     course_id = models.CharField(max_length=10)
     position = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, default=True, primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, default=True)
+
+    class Meta:
+        unique_together = (("course_id", "user"),)
+
     def __str__(self):
         return self.course_id
     #label divs as '1, 2, 3, 4'... so 1 is a course saved in
