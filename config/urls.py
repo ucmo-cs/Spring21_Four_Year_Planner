@@ -34,9 +34,9 @@ urlpatterns = [
 
     # depeingind on type of request:
     # if get
-    # returns the saved data positions
+    # returns the saved data positions for the current user
     # if put
-    # updates positions of course ids
+    # updates saved data rows for the current user
     path('saved_data', views.saved_data),
 
 

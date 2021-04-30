@@ -63,10 +63,11 @@ def coursesearchDESC(request, cid):
 @csrf_exempt
 def saved_data(request):
     """
-    List all saved data.
+    List all saved data for the current logged in user.
     """
     if request.method == 'GET':
-        saveddata = Saved_Data.objects.all()
+        name = request.user.username
+        saveddata = Saved_Data.objects.filter(user__username=name)
         serializer = SavedDataSerializer(saveddata, many=True)
         return JsonResponse(serializer.data, safe=False)
     # elif request.method == 'PUT':
@@ -146,5 +147,4 @@ def current_user(request):
     if request.method == 'GET':
         print(request.user.username)
         x = str(request.user.username)
-        # return JsonResponse("x", safe=False)
         return JsonResponse(x, safe=False)
