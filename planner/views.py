@@ -143,15 +143,8 @@ def current_user(request):
     """
     Return current logged in user
     """
-    # if request.method == 'GET':
-    #     print(request.user.username)
-    #     x = str(request.user.username)
-    #     # return JsonResponse("x", safe=False)
-    #     return JsonResponse(request.user.username, safe=False)
-
-    """
-    Return current logged in user
-    """
-    currentUser = request.user.username
     if request.method == 'GET':
-        return JsonResponse(currentUser, safe=False)
+        print(request.user.username)
+        x = str(request.user.username)
+        # return JsonResponse("x", safe=False)
+        return JsonResponse(x, safe=False)
