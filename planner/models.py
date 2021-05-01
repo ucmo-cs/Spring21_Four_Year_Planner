@@ -21,7 +21,7 @@ class Course(models.Model):
 class Saved_Data(models.Model):
     course_id = models.CharField(max_length=10)
     position = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, default=True, primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,default=True, primary_key=True)
 
     class Meta:
         unique_together = (("course_id", "user"),)
