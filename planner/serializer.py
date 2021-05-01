@@ -63,7 +63,6 @@ class SavedDataSerializer(serializers.ModelSerializer):
         return obj.user.username
     username = serializers.SerializerMethodField("getUsername")
 
-
     class Meta:
         model = Saved_Data
         fields = ['course_id', 'position', 'username']
