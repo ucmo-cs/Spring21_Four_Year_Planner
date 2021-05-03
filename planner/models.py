@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .utils import create_new_ref_number
 
 # Create your models here.
 class Course(models.Model):
@@ -21,7 +22,8 @@ class Course(models.Model):
 class Saved_Data(models.Model):
     course_id = models.CharField(max_length=10)
     position = models.IntegerField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE,default=True, primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,default=True)
+    id = models.IntegerField(primary_key=True, default=create_new_ref_number(), editable=False)
 
     class Meta:
         unique_together = (("course_id", "user"),)
