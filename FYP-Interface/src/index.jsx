@@ -31,7 +31,7 @@ class App extends React.Component {
 				courses: allCourses,
 				availableCourses: ref.data.map(c => c.course_id)
 			})
-		})
+		});
 
 		axios.get('/all_prerequisites').then(ref => {
 			const prereqs = {};
@@ -43,6 +43,12 @@ class App extends React.Component {
 			}
 			this.setState({
 				prerequisites: prereqs
+			})
+		});
+
+		axios.get('/current_user').then(ref => {
+			this.setState({
+				userName: ref.data
 			})
 		});
 
@@ -100,7 +106,7 @@ class App extends React.Component {
 					<img src={logo} alt="UCM Logo" height='100%'/>
 					<button onClick={() => this.popupCB("Hello there")}>hi</button>
 					<div className="ribbonFiller"/>
-					<div style={{'padding': '8px'}}>John Doe</div>
+					<div style={{'padding': '8px'}}>{this.state.userName}</div>
 					<img src={userIcon} alt="User Icon" height='80%' style={{'WebkitFilter': 'invert(1)'}}/>
 				</div>
 				<AvailableCourses state={this.state} searchCB={this.searchCB}/>

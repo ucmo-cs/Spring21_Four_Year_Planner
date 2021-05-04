@@ -59,6 +59,7 @@ const initialData = {
 		]
 	},
 	ButtonPopup: false,
+	userName: "",
 };
 
 export default initialData;
