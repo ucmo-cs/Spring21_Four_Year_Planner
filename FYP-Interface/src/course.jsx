@@ -7,10 +7,12 @@ export default class Course extends React.PureComponent {
 
 	information() {
 		return <div style={{margin: 15}}>
-			<div>Title: {this.props.desc}</div>
-			{console.log(this.props.state.prerequisites[this.props.id])}
-			<div>Prereqs: {this.props.state.prerequisites[this.props.id]}</div>
-			<div>Availability:</div>
+			<div>Course ID: {this.props.id}</div>
+			{console.log(this.props.state.prerequisites)}
+			<div>Prereqs: {this.props.state.prerequisites[this.props.id]?.map(c => c+" ") ?? "None"}</div>
+			<div>Availability: All semesters</div>
+			<br/>
+			<div>Course Description: Of all the monsters who fill the nightmares of our folklore, none terrify more than werewolves, because they transform unexpectedly from the familiar into horrors. For these, we seek bullets of silver than can magically lay them to rest.</div>
 		</div>
 	}
 

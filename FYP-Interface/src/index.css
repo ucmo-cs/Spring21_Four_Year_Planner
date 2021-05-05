@@ -49,6 +49,7 @@ body {
 .catalogSection {
 	background: white;
 	outline: 1px solid black;
+	padding: 7.5px;
 	margin-bottom: 4px;
 }
 
