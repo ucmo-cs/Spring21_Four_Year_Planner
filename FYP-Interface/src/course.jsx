@@ -32,7 +32,7 @@ export default class Course extends React.PureComponent {
 						{...provided.draggableProps}
 						{...provided.dragHandleProps}
 						ref={provided.innerRef}
-						className={"courseLabel " + (isInvalid ? "isInvalid" : "")}
+						className={"courseLabel informational" + (isInvalid ? "isInvalid" : "")}
 					>
 						<div style={{
 							outline:"1px solid black",
