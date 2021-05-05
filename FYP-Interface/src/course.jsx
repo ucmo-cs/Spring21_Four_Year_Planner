@@ -1,6 +1,8 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 
+import infoIcon from './information.svg';
+
 export default class Course extends React.PureComponent {
 
 	static popupCB;
@@ -37,6 +39,7 @@ export default class Course extends React.PureComponent {
 						<div style={{
 							outline:"1px solid black",
 							paddingLeft: "8px",
+							paddingRight: 2,
 							//fontSize: ".75em"
 							display: "flex",
 							justifyContent: "space-between",
@@ -44,7 +47,7 @@ export default class Course extends React.PureComponent {
 							{this.props.id}
 							<button onClick={() => {
 								Course.popupCB(this.props.desc)
-							}}>[ i ]</button>
+							}}><i class="fa fa-info-circle"></i></button>
 						</div>
 						<div style={{padding: "8px"}}>{this.props.desc}</div>
 					</div>

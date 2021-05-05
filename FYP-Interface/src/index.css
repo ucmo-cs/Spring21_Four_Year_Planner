@@ -91,7 +91,11 @@ body {
 }
 
 .informational button {
-	visibility: hidden
+  background-color: white; /* Blue background */
+  border: none; /* Remove borders */
+  font-size: 14px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
+	visibility: hidden;
 }
 
 .informational:hover button {
