@@ -1,4 +1,4 @@
-.popup{
+.popup {
     position: fixed;
     top: 0;
     left: 0;
@@ -6,25 +6,38 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.3);
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.popup-inner{
-    position: relative;
-    padding:32px;
+.popup-inner {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+
     width:100%;
-    max-width:640px;
+    max-width:700px;
     background-color: white;
 }
 
-.popup-inner .title{
-    background-color: #cf202e;
+
+.popup-title {
+    outline: 1px solid black;
+    padding: 8px;
+    background: rgb(191, 52, 54);
+    color: white;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 25px;
 }
 
-.popup-inner .close-btn{
-    position: absolute;
-    bottom: 16px;
-    right: 16px;
+
+.popup-title button {
+  background-color: transparent; /* Blue background */
+  border: none; /* Remove borders */
+  font-size: 14px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
 }

@@ -3,16 +3,18 @@ import './Popup.css';
 
 function Popup(props) {
 	return(props.active) ? (
-		<div className="popup">
+		<div className="popup" onClick={props.onClickCB}>
 			<div className="popup-inner">
-				<h3 className="Title">
-					Popup
-				</h3>
-				<div>
-					{props.msg}
+
+				<div className="popup-title">
+					<div>{props.msg.title}</div>
+					<div className="ribbonFiller"/>
+					<button onClick={props.onClickCB} className="close-btn"><i style={{fontSize: 25, 'WebkitFilter': 'invert(1)'}} class="fa fa-times"/></button>
 				</div>
-				<button onClick={props.onClickCB} className="close-btn">Close Popup</button>
-				{props.children}
+				<div>
+					{props.msg.body}
+				</div>
+
 			</div>
 		</div>
 	) : "";
