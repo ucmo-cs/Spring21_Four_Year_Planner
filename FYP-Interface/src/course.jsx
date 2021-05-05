@@ -5,11 +5,20 @@ export default class Course extends React.PureComponent {
 
 	static popupCB;
 
+	information() {
+		return <div style={{margin: 15}}>
+			<div>Title: {this.props.desc}</div>
+			{console.log(this.props.state.prerequisites[this.props.id])}
+			<div>Prereqs: {this.props.state.prerequisites[this.props.id]}</div>
+			<div>Availability:</div>
+		</div>
+	}
+
 	render() {
 
 		let isInvalid = false;
 		// only run if state received (does not when in availableCourses)
-		if(this.props.state){
+		if(this.props.shouldValidate && this.props.state){
 			const prereqs = new Set(this.props.state.prerequisites[this.props.id]);
 
 			for(const sem of Object.values(this.props.state.semesters)){
@@ -46,7 +55,7 @@ export default class Course extends React.PureComponent {
 							<button onClick={() => {
 								Course.popupCB({
 									title: this.props.desc,
-									body: this.props.desc
+									body: this.information(),
 								})
 							}}><i className="fa fa-info-circle"></i></button>
 						</div>

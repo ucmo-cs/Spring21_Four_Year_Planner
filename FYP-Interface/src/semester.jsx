@@ -17,6 +17,7 @@ export default class Semester extends React.Component {
 								index={index}
 								desc={course.description}
 								state={this.props.state}
+								shouldValidate={true}
 							/>
 						})}
 						{provided.placeholder}

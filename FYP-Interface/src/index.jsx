@@ -104,7 +104,6 @@ class App extends React.Component {
 			<div className="gridContainer">
 				<div className="ribbon">
 					<img src={logo} alt="UCM Logo" height='100%'/>
-					<button onClick={() => this.popupCB("Hello there")}>hi</button>
 					<div className="ribbonFiller"/>
 					<div style={{'padding': '8px'}}>{this.state.userName}</div>
 					<img src={userIcon} alt="User Icon" height='80%' style={{'WebkitFilter': 'invert(1)'}}/>
