@@ -14,7 +14,7 @@ import Course from './course';
 import Popup from './Popup';
 import { DragDropContext } from 'react-beautiful-dnd';
 
-class App extends React.PureComponent {
+class App extends React.Component {
 	state = initialData;
 
 	constructor(props) {
