@@ -2,7 +2,7 @@ import React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import Course from './course';
 
-export default class AvailableCourses extends React.Component {
+export default class AvailableCourses extends React.PureComponent {
 	availableCourseIds() {
 		var availableCourses = this.props.state.availableCourses;
 		for(const sem of Object.values(this.props.state.semesters)){

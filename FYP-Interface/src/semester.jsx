@@ -2,7 +2,7 @@ import React from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import Course from './course';
 
-export default class Semester extends React.Component {
+export default class Semester extends React.PureComponent {
 	render() { return (
 		<div className={this.props.sem.id+' semester'}>
 			<div className="title">{this.props.sem.title}</div>

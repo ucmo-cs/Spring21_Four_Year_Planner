@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class MajorCatalog extends React.Component {
+export default class MajorCatalog extends React.PureComponent {
 	expandSection(section, depth=0){
 
 		const childrenSections = section.sections?.map(s => this.expandSection(s, depth+1));
