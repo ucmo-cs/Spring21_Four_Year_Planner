@@ -27,4 +27,4 @@ if you are unable to log in to the application:
 
 **Demo of the project can be found here:**
 
-*https://www.youtube.com/watch?v=BgRuLQEiGOE*
+https://youtu.be/vsch0-uZ1TI
