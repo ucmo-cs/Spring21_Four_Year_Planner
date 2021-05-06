@@ -24,3 +24,7 @@ the project should be visible at localhost:8000
 if you are unable to log in to the application:
 
 *python manage.py createsuperuser*
+
+**Demo of the project can be found here:**
+
+*https://www.youtube.com/watch?v=BgRuLQEiGOE*
